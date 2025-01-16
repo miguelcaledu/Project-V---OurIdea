@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class CoinCollector : MonoBehaviour
 {
     private int value = 1; // Value of the coin
 
@@ -8,7 +8,14 @@ public class Coin : MonoBehaviour
     {
         if (other.CompareTag("Player")) // Check if the player collected the coin
         {
-            GameManager.instance.AddCoins(value); // Update the coin count in the GameManager
+            if (GameManager.instance != null)
+            {
+                GameManager.instance.AddCoins(value); // Update the coin count in the GameManager
+            }
+            else
+            {
+                Debug.LogError("GameManager.instance is null!");
+            }
             Destroy(gameObject); // Remove the coin from the scene
         }
     }
